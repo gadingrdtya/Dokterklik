@@ -1,18 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../context/AppContext';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useContext, useEffect, useState } from 'react'
+import { AppContext } from '../context/AppContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import ChatModal from '../components/ChatModal'
+import PrescriptionCard from '../components/PrescriptionCard'
+import { ChatContext } from '../context/ChatContext'
 
 const MyAppointments = () => {
-  const { backendUrl, token, getDoctorsData } = useContext(AppContext);
+  const { backendUrl, token, getDoctorsData } = useContext(AppContext)
+  const [chatAppointment, setChatAppointment] = useState(null)
+  const { messages, setMessages } = useContext(ChatContext)
+  const [appointments, setAppointments] = useState([])
 
-  const [appointments, setAppointments] = useState([]);
-  const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   // Format tanggal slot
   const slotDateFormat = (slotDate) => {
-    const dateArray = slotDate.split('_');
-    return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
+    const dateArray = slotDate.split('_')
+    return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`
   }
 
   // Ambil daftar janji temu pengguna
@@ -41,9 +46,9 @@ const MyAppointments = () => {
       );
 
       if (data.success) {
-        toast.success(data.message);
-        getUserAppointments(); // Update daftar janji temu setelah dibatalkan
-        getDoctorsData(); // Update data dokter jika diperlukan
+        toast.success(data.message)
+        getUserAppointments()
+        getDoctorsData()
       } else {
         toast.error(data.message);
       }
@@ -61,26 +66,26 @@ const MyAppointments = () => {
         { appointmentId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
+
       if (data.success) {
         const snapToken = data.snapToken;
-  
+
         if (!snapToken) {
           toast.error("Snap token not received");
           return;
         }
-  
+
         const startSnap = () => {
           window.snap.pay(snapToken, {
             onSuccess: function (result) {
               console.log("Payment Success:", result);
               toast.success('Payment Successful!');
-              getUserAppointments(); // 🔁 Fetch data appointment terbaru
+              getUserAppointments()
             },
             onPending: function (result) {
               console.log("Payment Pending:", result);
               toast.info('Payment is pending.');
-              getUserAppointments(); // 🔁 Refresh juga walau pending
+              getUserAppointments()
             },
             onError: function (result) {
               console.log("Payment Error:", result);
@@ -91,13 +96,13 @@ const MyAppointments = () => {
             }
           });
         };
-  
+
         // Load Snap.js jika belum ada
         if (!window.snap) {
           const script = document.createElement('script');
           script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
           script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY);
-          script.onload = startSnap; // 🧠 Jalankan Snap setelah script dimuat
+          script.onload = startSnap
           document.body.appendChild(script);
         } else {
           startSnap();
@@ -109,8 +114,59 @@ const MyAppointments = () => {
       console.error(error);
       toast.error(error.message);
     }
-  };
-  
+  }
+
+  const payForPrescription = async (appointment) => {
+    try {
+      const { data } = await axios.post(
+        `${backendUrl}/api/user/prescription/payment`,
+        { prescriptionId: appointment.prescription._id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+
+      if (data.success) {
+        const snapToken = data.snapToken
+
+        const startSnap = () => {
+          window.snap.pay(snapToken, {
+            onSuccess: function (result) {
+              toast.success("Prescription Payment Successful")
+              getUserAppointments()
+            },
+            onPending: function (result) {
+              toast.info("Prescription Payment Pending")
+              getUserAppointments()
+            },
+            onError: function (result) {
+              toast.error("Prescription Payment Failed")
+            },
+            onClose: function () {
+              console.log("Snap closed")
+            }
+          })
+        }
+
+        if (!window.snap) {
+          const script = document.createElement("script")
+          script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
+          script.setAttribute("data-client-key", import.meta.env.VITE_MIDTRANS_CLIENT_KEY)
+          script.onload = startSnap
+          document.body.appendChild(script)
+        } else {
+          startSnap()
+        }
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error("Prescription payment error")
+    }
+  }
+
+  const openChatModal = (appointment) => {
+    setChatAppointment(appointment)
+  }
 
   // Menjalankan getUserAppointments setelah token tersedia
   useEffect(() => {
@@ -141,33 +197,51 @@ const MyAppointments = () => {
                   <span className="text-sm text-neutral-700 font-medium">Date & Time:</span>
                   {slotDateFormat(item.slotDate)} | {item.slotTime}
                 </p>
+
+                {/* Tampilkan PrescriptionCard jika ada */}
+                {item.prescription && item.isCompleted && (
+                  <div className="mt-2">
+                    <PrescriptionCard prescription={item.prescription} user={item.userData} isDoctor={false} />
+                  </div>
+                )}
+
               </div>
               <div></div>
               <div className="flex flex-col gap-2 justify-end">
+                <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Konsultasi Online</button>
+                
+                {item.prescription && !item.prescription.isPaid && item.isCompleted && (
+                  <button onClick={() => payForPrescription(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Pay Prescription</button>
+                )}
+
                 {!item.cancelled && !item.payment && !item.isCompleted && (
-                  <button onClick={() => handlePayment(item._id)} className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300">Pay Online</button>
+                  <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Pay Online</button>
                 )}
 
                 {item.payment && !item.isCompleted && (
-                  <button className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border bg-indigo-50 rounded cursor-not-allowed" disabled>Paid</button>
+                  <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border bg-indigo-50 rounded cursor-not-allowed' disabled>Paid</button>
                 )}
 
                 {!item.cancelled && !item.payment && !item.isCompleted && (
-                  <button onClick={() => cancelAppointment(item._id)} className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300">Cancel appointment</button>
+                  <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel appointment</button>
                 )}
 
                 {item.cancelled && !item.isCompleted && (
-                  <button className="sm:min-w-48 py-2 border border-red-500 rounded text-red-500">Appointment cancelled</button>
+                  <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment cancelled</button>
                 )}
-                
+
                 {item.isCompleted && <button className='sm:min-w-48 py-2 border border-green-500 rounded text-green-500'>Completed</button>}
               </div>
             </div>
           ))
         )}
       </div>
+      {/* Tampilkan ChatModal jika appointment dipilih */}
+      {chatAppointment && (
+        <ChatModal appointment={chatAppointment} onClose={() => setChatAppointment(null)} />
+      )}  
     </div>
   );
 };
 
-export default MyAppointments;
+export default MyAppointments

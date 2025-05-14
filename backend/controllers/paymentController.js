@@ -1,8 +1,8 @@
-import { snap, core } from '../config/midtrans.js'; // Import Snap dan konfigurasi Midtrans
-import appointmentModel from '../models/appointmentModel.js'; // Model appointment
+import { snap, core } from '../config/midtrans.js'
+import appointmentModel from '../models/appointmentModel.js'
+import prescriptionModel from '../models/prescriptionModel.js'
 import crypto from 'crypto';
 
-// Fungsi untuk membuat Snap Token (untuk frontend)
 const paymentMidtrans = async (req, res) => {
     try {
         const { appointmentId } = req.body;
@@ -33,7 +33,6 @@ const paymentMidtrans = async (req, res) => {
     }
 };
 
-// Webhook dari Midtrans untuk menerima notifikasi pembayaran
 const midtransWebhook = async (req, res) => {
     try {
         const notification = req.body;
@@ -59,29 +58,37 @@ const midtransWebhook = async (req, res) => {
             return res.status(403).send('Invalid signature');
         }
 
-        const appointmentId = order_id.split('-')[1];
-        const appointment = await appointmentModel.findById(appointmentId);
-        if (!appointment) return res.status(404).send('Appointment not found');
-
         const transactionStatus = notification.transaction_status;
         const fraudStatus = notification.fraud_status;
 
-        if (transactionStatus === 'settlement') {
-            appointment.status = 'Paid';
-            appointment.payment = true;
-        } else if (transactionStatus === 'cancel' || transactionStatus === 'expire') {
-            appointment.status = 'Failed';
-            appointment.payment = false;
-        } else if (transactionStatus === 'pending') {
-            appointment.status = 'Pending';
-            appointment.payment = false;
+        if (order_id.startsWith("APPT-")) {
+            const appointmentId = order_id.split('-')[1];
+            const appointment = await appointmentModel.findById(appointmentId);
+            if (!appointment) return res.status(404).send('Appointment not found');
+
+            if (transactionStatus === 'settlement') {
+                appointment.status = 'Paid';
+                appointment.payment = true;
+            } else if (transactionStatus === 'cancel' || transactionStatus === 'expire') {
+                appointment.status = 'Failed';
+                appointment.payment = false;
+            } else if (transactionStatus === 'pending') {
+                appointment.status = 'Pending';
+                appointment.payment = false;
+            }
+
+            if (fraudStatus === 'challenge') {
+                console.log('⚠️ Fraud status: challenge – manual review needed.');
+            }
+
+            await appointment.save();
         }
 
-        if (fraudStatus === 'challenge') {
-            console.log('⚠️ Fraud status: challenge – manual review needed.');
+        if (order_id.startsWith("PRESC-") && transactionStatus === 'settlement') {
+            const prescriptionId = order_id.replace("PRESC-", "");
+            await prescriptionModel.findByIdAndUpdate(prescriptionId, { isPaid: true });
+            console.log(`💊 Prescription ${prescriptionId} marked as paid.`);
         }
-
-        await appointment.save();
 
         res.status(200).send('Webhook processed');
     } catch (error) {

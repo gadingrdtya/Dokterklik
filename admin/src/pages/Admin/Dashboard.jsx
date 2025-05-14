@@ -48,7 +48,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className='pt-4 border-2 border-gray-100 border-t-0'>
+      <div className='bg-white pt-4 border-2 border-gray-100 border-t-0'>
         {
           dashData.latestAppointments.map((item, index) => (
             <div className='flex items-center px-6 py-3 gap-3 hover:bg-gray-100' key={index}>

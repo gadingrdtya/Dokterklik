@@ -174,6 +174,10 @@ const listAppointment = async (req, res) => {
     try {
         const userId = req.user.userId
         const appointments = await appointmentModel.find({ userId })
+            .populate({
+                path: 'prescription',
+                model: 'Prescription'
+            });
 
         res.json({ success: true, appointments })
     } catch (error) {
