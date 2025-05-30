@@ -91,13 +91,13 @@ export const doctors = [
         name: 'Dr. Richard James',
         image: doc1,
         speciality: 'General physician',
-        degree: 'MBBS',
+        degree: 'MD (General Practitioner)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Richard James is a dedicated General Physician with 4 years of experience, specializing in comprehensive medical care, preventive medicine, and early diagnosis for a wide range of health conditions in Jakarta. He is committed to providing patient-centered care, ensuring thorough examinations, and offering personalized treatment plans tailored to individual needs, with a focus on promoting overall wellness and community health.',
+        fees: 50000,
         address: {
-            line1: '17th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Sudirman No. 10',
+            line2: 'Jakarta Pusat'
         }
     },
     {
@@ -105,13 +105,13 @@ export const doctors = [
         name: 'Dr. Emily Larson',
         image: doc2,
         speciality: 'Gynecologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.OG (Obstetrics & Gynecology)',
         experience: '3 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 60,
+        about: 'Dr. Emily Larson is an experienced Gynecologist with 3 years of expertise, focusing on women’s health, prenatal care, and gynecological treatments in Surabaya. She provides compassionate care for conditions such as pregnancy, menstrual disorders, and reproductive health, utilizing the latest medical techniques to ensure the well-being of her patients with a holistic approach to women’s healthcare needs.',
+        fees: 60000,
         address: {
-            line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Raya Darmo No. 15',
+            line2: 'Surabaya'
         }
     },
     {
@@ -119,13 +119,13 @@ export const doctors = [
         name: 'Dr. Sarah Patel',
         image: doc3,
         speciality: 'Dermatologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.KK (Dermatology & Venereology)',
         experience: '1 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 30,
+        about: 'Dr. Sarah Patel is a skilled Dermatologist with 1 year of experience, specializing in skin conditions, cosmetic dermatology, and treatment plans in Bandung. She offers expert care for acne, eczema, and skin rejuvenation, employing advanced dermatological procedures to enhance skin health, while also providing education on skincare routines tailored to diverse skin types.',
+        fees: 30000,
         address: {
-            line1: '37th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Asia Afrika No. 20',
+            line2: 'Bandung'
         }
     },
     {
@@ -133,13 +133,13 @@ export const doctors = [
         name: 'Dr. Christopher Lee',
         image: doc4,
         speciality: 'Pediatricians',
-        degree: 'MBBS',
+        degree: 'MD, Sp.A (Pediatrics)',
         experience: '2 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 40,
+        about: 'Dr. Christopher Lee is a compassionate Pediatrician with 2 years of experience, focusing on child health, vaccinations, and developmental care in Medan. He is dedicated to monitoring growth milestones, managing childhood illnesses, and providing supportive guidance to parents, ensuring a nurturing environment for the healthy development of young patients.',
+        fees: 40000,
         address: {
-            line1: '47th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Gatot Subroto No. 25',
+            line2: 'Medan'
         }
     },
     {
@@ -147,13 +147,13 @@ export const doctors = [
         name: 'Dr. Jennifer Garcia',
         image: doc5,
         speciality: 'Neurologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.S (Neurology)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Jennifer Garcia is a dedicated Neurologist with 4 years of experience, specializing in neurological disorders and brain health treatments in Semarang. She excels in diagnosing and managing conditions like epilepsy, migraines, and stroke, utilizing cutting-edge technology to improve patient outcomes and enhance quality of life through tailored neurological care.',
+        fees: 50000,
         address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Pemuda No. 30',
+            line2: 'Semarang'
         }
     },
     {
@@ -161,13 +161,13 @@ export const doctors = [
         name: 'Dr. Andrew Williams',
         image: doc6,
         speciality: 'Gastroenterologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.PD-KGEH (Gastroenterology)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Andrew Williams is an expert Gastroenterologist with 4 years of experience, focusing on digestive health and gastrointestinal treatments in Yogyakarta. He specializes in treating conditions such as acid reflux, irritable bowel syndrome, and liver diseases, offering advanced endoscopic procedures and dietary advice to promote long-term digestive wellness.',
+        fees: 50000,
         address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Malioboro No. 35',
+            line2: 'Yogyakarta'
         }
     },
     {
@@ -175,13 +175,13 @@ export const doctors = [
         name: 'Dr. Christopher Davis',
         image: doc7,
         speciality: 'General physician',
-        degree: 'MBBS',
+        degree: 'MD (General Practitioner)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Christopher Davis is a committed General Physician with 4 years of experience, providing holistic care and preventive medicine in Bali. He focuses on chronic disease management, routine check-ups, and health education, ensuring patients receive comprehensive support to maintain optimal health and prevent future medical issues.',
+        fees: 50000,
         address: {
-            line1: '17th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Raya Kuta No. 40',
+            line2: 'Denpasar, Bali'
         }
     },
     {
@@ -189,13 +189,13 @@ export const doctors = [
         name: 'Dr. Timothy White',
         image: doc8,
         speciality: 'Gynecologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.OG (Obstetrics & Gynecology)',
         experience: '3 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 60,
+        about: 'Dr. Timothy White is a skilled Gynecologist with 3 years of expertise, specializing in women’s reproductive health in Makassar. He offers expert care for fertility issues, menopause management, and gynecological surgeries, ensuring a supportive and empathetic approach to address the unique health needs of women at all life stages.',
+        fees: 60000,
         address: {
-            line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Andi Tonro No. 45',
+            line2: 'Makassar'
         }
     },
     {
@@ -203,13 +203,13 @@ export const doctors = [
         name: 'Dr. Ava Mitchell',
         image: doc9,
         speciality: 'Dermatologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.KK (Dermatology & Venereology)',
         experience: '1 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 30,
+        about: 'Dr. Ava Mitchell is a talented Dermatologist with 1 year of experience, focusing on skin care and dermatological treatments in Palembang. She provides solutions for skin allergies, psoriasis, and cosmetic enhancements, combining innovative treatments with patient education to foster long-lasting skin health and confidence.',
+        fees: 30000,
         address: {
-            line1: '37th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Sudirman No. 50',
+            line2: 'Palembang'
         }
     },
     {
@@ -217,13 +217,13 @@ export const doctors = [
         name: 'Dr. Jeffrey King',
         image: doc10,
         speciality: 'Pediatricians',
-        degree: 'MBBS',
+        degree: 'MD, Sp.A (Pediatrics)',
         experience: '2 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 40,
+        about: 'Dr. Jeffrey King is a caring Pediatrician with 2 years of experience, specializing in child wellness and pediatric care in Samarinda. He offers expert advice on nutrition, immunization schedules, and behavioral development, creating a trusting environment to support the physical and emotional growth of children.',
+        fees: 40000,
         address: {
-            line1: '47th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Pahlawan No. 55',
+            line2: 'Samarinda'
         }
     },
     {
@@ -231,13 +231,13 @@ export const doctors = [
         name: 'Dr. Zoe Kelly',
         image: doc11,
         speciality: 'Neurologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.S (Neurology)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Zoe Kelly is a proficient Neurologist with 4 years of experience, focusing on neurological diagnostics in Surakarta. She is skilled in treating Parkinson’s disease, multiple sclerosis, and nerve injuries, employing advanced diagnostic tools to deliver precise treatments and improve patient mobility and cognitive health.',
+        fees: 50000,
         address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Slamet Riyadi No. 60',
+            line2: 'Surakarta'
         }
     },
     {
@@ -245,13 +245,13 @@ export const doctors = [
         name: 'Dr. Patrick Harris',
         image: doc12,
         speciality: 'Gastroenterologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.PD-KGEH (Gastroenterology)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Patrick Harris is an experienced Gastroenterologist with 4 years of expertise, specializing in digestive disorders in Malang. He provides advanced care for ulcers, pancreatitis, and colorectal issues, integrating modern medical technology with personalized dietary plans to enhance digestive system recovery.',
+        fees: 50000,
         address: {
-            line1: '57th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Merdeka No. 65',
+            line2: 'Malang'
         }
     },
     {
@@ -259,13 +259,13 @@ export const doctors = [
         name: 'Dr. Chloe Evans',
         image: doc13,
         speciality: 'General physician',
-        degree: 'MBBS',
+        degree: 'MD (General Practitioner)',
         experience: '4 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 50,
+        about: 'Dr. Chloe Evans is a dedicated General Physician with 4 years of experience, offering comprehensive health care in Batam. She excels in managing acute illnesses, conducting health screenings, and providing lifestyle counseling, ensuring patients receive thorough and compassionate medical attention.',
+        fees: 50000,
         address: {
-            line1: '17th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Raja Haji No. 70',
+            line2: 'Batam'
         }
     },
     {
@@ -273,13 +273,13 @@ export const doctors = [
         name: 'Dr. Ryan Martinez',
         image: doc14,
         speciality: 'Gynecologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.OG (Obstetrics & Gynecology)',
         experience: '3 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 60,
+        about: 'Dr. Ryan Martinez is a knowledgeable Gynecologist with 3 years of experience, focusing on women’s health in Pekanbaru. He specializes in prenatal care, hormonal therapy, and minimally invasive surgeries, delivering high-quality care with a focus on patient comfort and long-term health outcomes.',
+        fees: 60000,
         address: {
-            line1: '27th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Sudirman No. 75',
+            line2: 'Pekanbaru'
         }
     },
     {
@@ -287,13 +287,13 @@ export const doctors = [
         name: 'Dr. Amelia Hill',
         image: doc15,
         speciality: 'Dermatologist',
-        degree: 'MBBS',
+        degree: 'MD, Sp.KK (Dermatology & Venereology)',
         experience: '1 Years',
-        about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
-        fees: 30,
+        about: 'Dr. Amelia Hill is a promising Dermatologist with 1 year of experience, specializing in skin treatments in Manado. She addresses issues like skin infections, aging skin, and laser therapies, offering personalized treatment plans and educating patients on maintaining healthy skin in various climates.',
+        fees: 30000,
         address: {
-            line1: '37th Cross, Richmond',
-            line2: 'Circle, Ring Road, London'
+            line1: 'Jalan Sam Ratulangi No. 80',
+            line2: 'Manado'
         }
     },
 ]

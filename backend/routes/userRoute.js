@@ -1,5 +1,6 @@
 import express from 'express'
-import { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment, paymentMidtrans, midtransWebhook, getAppointmentStatus} from '../controllers/userController.js'
+import { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment, paymentMidtrans, midtransWebhook, getAppointmentStatus, calculatePaymentDetails } from '../controllers/userController.js'
+import { getUserPrescriptions } from '../controllers/prescriptionController.js'
 import authUser from '../middlewares/authUser.js'
 import authMiddleware from '../middlewares/authMiddleware.js'
 import upload from '../middlewares/multer.js'
@@ -16,6 +17,8 @@ userRouter.get('/appointments',authUser,listAppointment)
 userRouter.post('/cancel-appointment',authUser,cancelAppointment)
 userRouter.post('/payment/midtrans', authMiddleware, paymentMidtrans)
 userRouter.post('/midtrans/webhook', midtransWebhook)
-userRouter.get('/appointment-status/:id', authUser, getAppointmentStatus);
+userRouter.get('/appointment-status/:id', authUser, getAppointmentStatus) 
+userRouter.get('/prescriptions', authUser, getUserPrescriptions)
+userRouter.get('/payment/calculate/:appointmentId', authUser, calculatePaymentDetails)
 
 export default userRouter

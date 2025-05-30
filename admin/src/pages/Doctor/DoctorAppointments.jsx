@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DoctorContext } from '../../context/DoctorContext';
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets';
-import ChatModal from '../../components/ChatModal';
-import PrescriptionCard from '../../components/PrescriptionCard';
+import ChatModal from '../../components/ChatModal'
 
 const DoctorAppointments = () => {
   const { dToken, appointments, getAppointments, completeAppointment, cancelAppointment } = useContext(DoctorContext);
@@ -15,6 +14,13 @@ const DoctorAppointments = () => {
       getAppointments();
     }
   }, [dToken]);
+
+  const calculateFees = (item) => {
+    const doctorFee = item.docData?.fees || 0;
+    const consultationFee = 30000;
+    const prescriptionFee = item.prescription && item.prescription.medicines && item.prescription.medicines.length > 0 ? item.prescription.medicines.length * 10000 : 0;
+    return doctorFee + consultationFee + prescriptionFee;
+  }
 
   return (
     <div className='w-full max-w-6xl m-5'>
@@ -44,7 +50,7 @@ const DoctorAppointments = () => {
             </div>
             <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
             <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
-            <p>{currency}{item.amount}</p>
+            <p>{currency}{calculateFees(item)}</p>
             {
               item.cancelled
                 ? <p className='text-red-400 text-xs font-medium'>Cancelled</p>
@@ -58,13 +64,6 @@ const DoctorAppointments = () => {
             <button onClick={() => setSelectedAppointment(item)} className='text-white text-xs bg-[#00B8BA] px-4 py-1 rounded-full cursor-pointer'>
               Chat
             </button>
-
-            {/* PrescriptionCard muncul jika resep tersedia */}
-            {item.prescription && (
-              <div className="col-span-full mt-4 w-full">
-                <PrescriptionCard prescription={item.prescription} user={item.userData} isDoctor={true} />
-              </div>
-            )}
           </div>
         ))}
       </div>

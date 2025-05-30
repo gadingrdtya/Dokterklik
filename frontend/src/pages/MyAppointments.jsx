@@ -11,6 +11,9 @@ const MyAppointments = () => {
   const [chatAppointment, setChatAppointment] = useState(null)
   const { messages, setMessages } = useContext(ChatContext)
   const [appointments, setAppointments] = useState([])
+  const [selectedPrescription, setSelectedPrescription] = useState(null)
+  const [orderDetails, setOrderDetails] = useState(null)
+  const [showModal, setShowModal] = useState(false)
 
   const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -61,106 +64,87 @@ const MyAppointments = () => {
   // Menangani pembayaran
   const handlePayment = async (appointmentId) => {
     try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/user/payment/midtrans`,
-        { appointmentId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      console.log("Current token:", token);
+      console.log("Attempting payment for appointmentId:", appointmentId);
+      const resCalc = await axios.get(`${backendUrl}/api/user/payment/calculate/${appointmentId}`, {
+        headers: { token },
+      })
+      if (resCalc.data.success) {
+        const total = resCalc.data.details.total;
+        const response = await axios.post(
+          `${backendUrl}/api/user/payment/midtrans`,
+          { appointmentId, total },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        const data = response.data;
 
-      if (data.success) {
-        const snapToken = data.snapToken;
+        if (data.success) {
+          const snapToken = data.snapToken;
 
-        if (!snapToken) {
-          toast.error("Snap token not received");
-          return;
-        }
+          if (!snapToken) {
+            toast.error("Snap token not received");
+            return;
+          }
 
-        const startSnap = () => {
-          window.snap.pay(snapToken, {
-            onSuccess: function (result) {
-              console.log("Payment Success:", result);
-              toast.success('Payment Successful!');
-              getUserAppointments()
-            },
-            onPending: function (result) {
-              console.log("Payment Pending:", result);
-              toast.info('Payment is pending.');
-              getUserAppointments()
-            },
-            onError: function (result) {
-              console.log("Payment Error:", result);
-              toast.error('Payment failed.');
-            },
-            onClose: function () {
-              console.log("Snap closed without finishing the payment.");
-            }
-          });
-        };
+          const startSnap = () => {
+            window.snap.pay(snapToken, {
+              onSuccess: function (result) {
+                console.log("Payment Success:", result);
+                toast.success('Payment Successful!');
+                getUserAppointments();
+              },
+              onPending: function (result) {
+                console.log("Payment Pending:", result);
+                toast.info('Payment is pending.');
+                getUserAppointments();
+              },
+              onError: function (result) {
+                console.log("Payment Error:", result);
+                toast.error('Payment failed.');
+              },
+              onClose: function () {
+                console.log("Snap closed without finishing the payment.");
+              }
+            });
+          };
 
-        // Load Snap.js jika belum ada
-        if (!window.snap) {
-          const script = document.createElement('script');
-          script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
-          script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY);
-          script.onload = startSnap
-          document.body.appendChild(script);
+          if (!window.snap) {
+            const script = document.createElement('script');
+            script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
+            script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY);
+            script.onload = startSnap;
+            document.body.appendChild(script);
+          } else {
+            startSnap();
+          }
         } else {
-          startSnap();
+          toast.error(data.message);
         }
       } else {
-        toast.error(data.message);
+        toast.error("Failed to calculate payment details: " + (resCalc.data.message || "No message"));
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error in handlePayment:", error);
       toast.error(error.message);
     }
   }
 
-  const payForPrescription = async (appointment) => {
+  const openPrescriptionModal = async (appointment) => {
     try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/user/prescription/payment`,
-        { prescriptionId: appointment.prescription._id },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      const res = await axios.get(`${backendUrl}/api/user/payment/calculate/${appointment._id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      if (data.success) {
-        const snapToken = data.snapToken
-
-        const startSnap = () => {
-          window.snap.pay(snapToken, {
-            onSuccess: function (result) {
-              toast.success("Prescription Payment Successful")
-              getUserAppointments()
-            },
-            onPending: function (result) {
-              toast.info("Prescription Payment Pending")
-              getUserAppointments()
-            },
-            onError: function (result) {
-              toast.error("Prescription Payment Failed")
-            },
-            onClose: function () {
-              console.log("Snap closed")
-            }
-          })
-        }
-
-        if (!window.snap) {
-          const script = document.createElement("script")
-          script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
-          script.setAttribute("data-client-key", import.meta.env.VITE_MIDTRANS_CLIENT_KEY)
-          script.onload = startSnap
-          document.body.appendChild(script)
-        } else {
-          startSnap()
-        }
+      if (res.data.success) {
+        setSelectedPrescription({ ...appointment.prescription, appointment })
+        setOrderDetails(res.data.details)
+        setShowModal(true)
       } else {
-        toast.error(data.message)
+        toast.error("Failed to fetch order details.")
       }
     } catch (error) {
-      console.error(error)
-      toast.error("Prescription payment error")
+      console.error(error);
+      toast.error(error.message);
     }
   }
 
@@ -197,25 +181,17 @@ const MyAppointments = () => {
                   <span className="text-sm text-neutral-700 font-medium">Date & Time:</span>
                   {slotDateFormat(item.slotDate)} | {item.slotTime}
                 </p>
-
-                {/* Tampilkan PrescriptionCard jika ada */}
-                {item.prescription && item.isCompleted && (
-                  <div className="mt-2">
-                    <PrescriptionCard prescription={item.prescription} user={item.userData} isDoctor={false} />
-                  </div>
-                )}
-
               </div>
               <div></div>
               <div className="flex flex-col gap-2 justify-end">
                 <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Konsultasi Online</button>
-                
-                {item.prescription && !item.prescription.isPaid && item.isCompleted && (
-                  <button onClick={() => payForPrescription(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Pay Prescription</button>
-                )}
 
                 {!item.cancelled && !item.payment && !item.isCompleted && (
                   <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Pay Online</button>
+                )}
+
+                {item.isCompleted && item.prescription && (
+                  <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Resep</button>
                 )}
 
                 {item.payment && !item.isCompleted && (
@@ -239,7 +215,21 @@ const MyAppointments = () => {
       {/* Tampilkan ChatModal jika appointment dipilih */}
       {chatAppointment && (
         <ChatModal appointment={chatAppointment} onClose={() => setChatAppointment(null)} />
-      )}  
+      )}
+
+      {showModal && selectedPrescription && (
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white p-4 rounded shadow-lg max-w-md w-full">
+            <PrescriptionCard
+              prescription={selectedPrescription}
+              user={selectedPrescription.appointment.userData}
+              isDoctor={false}
+              orderDetails={orderDetails}
+            />
+            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">Tutup</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

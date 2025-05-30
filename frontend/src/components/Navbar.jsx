@@ -37,7 +37,6 @@ const Navbar = () => {
             <li className='py-1'>CONTACT</li>
             <hr className='bg-[#00B8BA] border-none outline-none h-0.5 w-3/5 m-auto hidden'/>
         </NavLink>
-        <li className='text-xs border border-gray-300 rounded-full px-5 py-1.5 transition'> <a href='http://localhost:5174' target='_blank' rel='noopener noreferrer'>Admin Panel</a></li>
       </ul>
       <div className='flex items-center gap-4'>
         { token && userData ? (

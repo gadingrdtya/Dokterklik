@@ -56,7 +56,7 @@ const appointmentsDoctor = async (req, res) => {
         const { docId } = req.user
         const appointments = await appointmentModel.find({ docId })
             .populate('userId', 'name image dob')
-            .populate('prescription')             
+            .populate('prescription')
             .sort({ createdAt: -1 });
 
         const formatted = appointments.map((apt) => ({
@@ -74,20 +74,25 @@ const appointmentsDoctor = async (req, res) => {
 // API to mark appointment completed for doctor panel
 const appointmentComplete = async (req, res) => {
     try {
-        const { appointmentId } = req.body
-        const docId = req.user.docId
-        const appointmentData = await appointmentModel.findById(appointmentId)
+        const { appointmentId } = req.body;
+        const docId = req.user.docId;
+        const appointmentData = await appointmentModel.findById(appointmentId);
 
-        if (appointmentData && appointmentData.docId === docId) {
-            await appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true })
-            return res.json({ success: true, message: "Appointment Completed" })
-        } else {
-            return res.json({ success: false, message: "Mark Failed" })
+        if (!appointmentData || appointmentData.docId !== docId) {
+            return res.json({ success: false, message: "Unauthorized or Appointment not found" });
         }
 
+        // Pastikan pembayaran sudah dilakukan oleh pasien
+        if (!appointmentData.payment) {
+            return res.json({ success: false, message: "Payment not yet completed by patient" });
+        }
+
+        await appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true, status: 'consulted' });
+        console.log(`Appointment ${appointmentId} confirmed by doctor ${docId}`)
+        return res.json({ success: true, message: "Appointment Confirmed" });
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
 }
 
@@ -114,39 +119,43 @@ const appointmentCancel = async (req, res) => {
 // API to get dashboard for doctor panel
 const doctorDashboard = async (req, res) => {
     try {
-        const { docId } = req.user
-        const appointments = await appointmentModel.find({ docId })
+        const { docId } = req.user;
+        const appointments = await appointmentModel.find({ docId }).populate('prescription');
 
-        let earnings = 0
+        let earnings = 0;
 
-        appointments.map((item) => {
+        appointments.forEach((item) => {
             if (item.isCompleted || item.payment) {
-                earnings += item.amount
+                const totalForThisAppointment = item.amount || 0
+                console.log(`Appointment ${item._id}: Total from amount: ${totalForThisAppointment}`);
+                earnings += totalForThisAppointment;
             }
-        })
+        });
 
-        let patients = []
+        let patients = [];
 
-        appointments.map((item) => {
-            if (!patients.includes(item.userId)) {
-                patients.push(item.userId)
+        appointments.forEach((item) => {
+            if (!patients.includes(item.userId.toString())) {
+                patients.push(item.userId.toString());
             }
-        })
+        });
 
         const dashData = {
             earnings,
             appointments: appointments.length,
             patients: patients.length,
-            latestAppointments: appointments.reverse().slice(0, 5)
-        }
-
-        res.json({ success: true, dashData })
-
+            latestAppointments: appointments.reverse().slice(0, 5).map(item => ({
+                ...item._doc,
+                totalAmount: item.amount || 0
+            })),
+        };
+        console.log('Dashboard Data:', dashData);
+        res.json({ success: true, dashData });
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
-}
+};
 
 // API to get doctor profile for doctor panel
 const doctorProfile = async (req, res) => {
