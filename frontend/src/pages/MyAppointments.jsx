@@ -219,7 +219,7 @@ const MyAppointments = () => {
 
       {showModal && selectedPrescription && (
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white p-4 rounded shadow-lg max-w-md w-full">
+          <div className="bg-white p-4 rounded shadow-lg max-w-md w-[90%]">
             <PrescriptionCard
               prescription={selectedPrescription}
               user={selectedPrescription.appointment.userData}
