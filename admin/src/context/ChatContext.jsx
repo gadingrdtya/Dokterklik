@@ -8,7 +8,7 @@ const ChatContextProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        const newSocket = io("http://localhost:4000")
+        const newSocket = io(`${import.meta.env.VITE_BACKEND_URL}`)
         setSocket(newSocket);
 
         newSocket.on("receiveMessage", (msg) => {

@@ -21,7 +21,7 @@ const PrescriptionForm = ({ appointmentId, userId, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/doctor/prescriptions', {appointmentId, userId, medicines,notes}, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/doctor/prescriptions`, {appointmentId, userId, medicines,notes}, {
         headers: { dToken: localStorage.getItem("dToken") },
       });
 
