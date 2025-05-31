@@ -184,14 +184,14 @@ const MyAppointments = () => {
               </div>
               <div></div>
               <div className="flex flex-col gap-2 justify-end">
-                <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Konsultasi Online</button>
+                <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Online Consultant</button>
 
                 {!item.cancelled && !item.payment && !item.isCompleted && (
                   <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Pay Online</button>
                 )}
 
                 {item.isCompleted && item.prescription && (
-                  <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Resep</button>
+                  <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Prescription</button>
                 )}
 
                 {item.payment && !item.isCompleted && (
@@ -219,14 +219,14 @@ const MyAppointments = () => {
 
       {showModal && selectedPrescription && (
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white p-4 rounded shadow-lg max-w-md w-full">
+          <div className="bg-white p-4 rounded shadow-lg max-w-md w-[90%]">
             <PrescriptionCard
               prescription={selectedPrescription}
               user={selectedPrescription.appointment.userData}
               isDoctor={false}
               orderDetails={orderDetails}
             />
-            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">Tutup</button>
+            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">Close</button>
           </div>
         </div>
       )}
