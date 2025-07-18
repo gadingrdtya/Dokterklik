@@ -40,22 +40,10 @@ const addDoctor = async (req, res) => {
             email,
             image: imageUrl,
             password: hashedPassword,
-            speciality: {
-                id: speciality,
-                en: ""  // Atau isi manual jika ingin langsung
-            },
-            degree: {
-                id: degree,
-                en: ""
-            },
-            experience: {
-                id: experience,
-                en: ""
-            },
-            about: {
-                id: about,
-                en: ""
-            },
+            speciality,
+            degree,
+            experience,
+            about,
             fees,
             address: JSON.parse(address),
             date: Date.now()
