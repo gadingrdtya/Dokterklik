@@ -233,11 +233,7 @@ const MyAppointments = () => {
               isDoctor={false}
               orderDetails={orderDetails}
             />
-<<<<<<< HEAD
             <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">{t('common.close')}</button>
-=======
-            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">Close</button>
->>>>>>> 29e40e6757e32b8c24ca861f973121bdacbc2b25
           </div>
         </div>
       )}
