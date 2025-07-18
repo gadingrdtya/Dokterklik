@@ -191,14 +191,22 @@ const MyAppointments = () => {
               </div>
               <div></div>
               <div className="flex flex-col gap-2 justify-end">
+<<<<<<< HEAD
                 <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>{t('myappointments.online_consult')}</button>
+=======
+                <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Online Consultant</button>
+>>>>>>> 29e40e6757e32b8c24ca861f973121bdacbc2b25
 
                 {!item.cancelled && !item.payment && !item.isCompleted && (
                   <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>{t('myappointments.pay_online')}</button>
                 )}
 
                 {item.isCompleted && item.prescription && (
+<<<<<<< HEAD
                   <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>{t('myappointments.prescription')}</button>
+=======
+                  <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Prescription</button>
+>>>>>>> 29e40e6757e32b8c24ca861f973121bdacbc2b25
                 )}
 
                 {item.payment && !item.isCompleted && (
@@ -233,7 +241,11 @@ const MyAppointments = () => {
               isDoctor={false}
               orderDetails={orderDetails}
             />
+<<<<<<< HEAD
             <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">{t('common.close')}</button>
+=======
+            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">Close</button>
+>>>>>>> 29e40e6757e32b8c24ca861f973121bdacbc2b25
           </div>
         </div>
       )}
