@@ -1,0 +1,161 @@
+{
+  "login": {
+    "create_account": "Create Account",
+    "login": "Login",
+    "please": "Please",
+    "signup_action": "sign up to book appointment",
+    "login_action": "log in to book appointment",
+    "full_name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "already_have_account": "Already have an account?",
+    "login_here": "Login here",
+    "new_account": "Create a new account?",
+    "click_here": "Click here"
+  },
+  "navbar": {
+    "home": "HOME",
+    "doctors": "ALL DOCTORS",
+    "about": "ABOUT",
+    "contact": "CONTACT",
+    "my_profile": "My Profile",
+    "my_appointments": "My Appointments",
+    "logout": "Logout",
+    "create_account": "Create Account"
+  },
+  "header": {
+    "title1": "Book Appointment",
+    "title2": "With Trusted Doctor",
+    "subtitle": "Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.",
+    "button": "Book Appointment"
+  },
+  "banner": {
+    "title1": "Book Appointment",
+    "title2": "With Trusted Doctor",
+    "button": "Create Account"
+  },
+  "speciality": {
+    "title": "Find by Speciality",
+    "subtitle": "Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.",
+    "list": {
+      "General physician": "General physician",
+      "Gynecologist": "Gynecologist",
+      "Dermatologist": "Dermatologist",
+      "Pediatricians": "Pediatricians",
+      "Neurologist": "Neurologist",
+      "Gastroenterologist": "Gastroenterologist"
+    }
+  },
+  "topDoctors": {
+    "title": "Top Doctors to Book",
+    "subtitle": "Simply browse through our extensive list of trusted doctors.",
+    "available": "Available",
+    "unavailable": "Not Available",
+    "more": "More"
+  },
+  "doctors": {
+    "browseText": "Browse through the doctors specialist.",
+    "filterButton": "Filters",
+    "available": "Available",
+    "unavailable": "Not Available",
+    "specialities": {
+      "General physician": "General Physician",
+      "Gynecologist": "Gynecologist",
+      "Dermatologist": "Dermatologist",
+      "Pediatricians": "Pediatricians",
+      "Neurologist": "Neurologist",
+      "Gastroenterologist": "Gastroenterologist"
+    }
+  },
+  "appointment": {
+    "about": "About",
+    "fee": "Appointment Fee",
+    "booking_slots": "Booking Slots",
+    "book_now": "Book an Appointment",
+    "login_required": "Login to book appointment",
+    "userdata_missing": "User data not found. Please login again."
+  },
+  "days": {
+    "sun": "Sun",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat"
+  },
+  "about": {
+    "title": "ABOUT",
+    "us": "US",
+    "description1": "Welcome to DokterKlik, your trusted partner in managing your healthcare needs easily and efficiently. At DokterKlik, we understand the challenges that individuals face when it comes to scheduling appointments with doctors and conducting online medical consultations via chat.",
+    "description2": "DokterKlik is committed to providing excellence in healthcare technology. We continuously strive to improve our platform, integrating the latest advancements to enhance user experience and deliver superior service. Whether you are booking your first appointment or conducting an online medical consultation via chat, DokterKlik is here to support you every step of the way.",
+    "vision_title": "Our Vision",
+    "vision_text": "Our vision at DokterKlik is to create a seamless healthcare experience for every user. We aim to bridge the gap between patients and healthcare providers, making it easier for you to access the care you need, when you need it.",
+    "why": "WHY",
+    "choose_us": "CHOOSE US",
+    "efficiency_title": "EFFICIENCY:",
+    "efficiency_text": "Streamlined appointment scheduling that fits into your busy lifestyle.",
+    "convenience_title": "CONVENIENCE:",
+    "convenience_text": "Access to a network of trusted healthcare professionals in your area.",
+    "personalization_title": "PERSONALIZATION:",
+    "personalization_text": "Tailored recommendations and reminders to help you stay on top of your health."
+  },
+  "contact": {
+    "title": "CONTACT",
+    "us": "US",
+    "office_title": "OUR OFFICE",
+    "office_address1": "Jalan Sudirman No. 123",
+    "office_address2": "Jakarta Pusat, Indonesia",
+    "contact_info1": "Tel: (021) 9080-7050",
+    "contact_info2": "Email: dokterklik@gmail.com",
+    "careers_title": "Careers at DOKTERKLIK",
+    "careers_text": "Learn more about our teams and job openings.",
+    "explore_jobs": "Explore Jobs"
+  },
+  "relatedDoctors": {
+    "title": "Related Doctors",
+    "subtitle": "Simply browse through our extensive list of trusted doctors.",
+    "available": "Available",
+    "unavailable": "Not Available",
+    "more": "More"
+  },
+  "profile": {
+    "contact_info": "CONTACT INFORMATION",
+    "basic_info": "BASIC INFORMATION",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "gender": "Gender",
+    "dob": "Birthday",
+    "male": "Male",
+    "female": "Female",
+    "save": "Save information",
+    "edit": "Edit"
+  },
+  "myappointments": {
+    "title": "My Appointments",
+    "empty": "No appointments found.",
+    "online_consult": "Online Consultant",
+    "pay_online": "Pay Online",
+    "cancel": "Cancel appointment",
+    "cancelled": "Appointment cancelled",
+    "completed": "Completed",
+    "prescription": "Prescription",
+    "paid": "Paid",
+    "datetime": "Date & Time",
+    "address": "Address:"
+  },
+  "common": {
+    "close": "Close"
+  },
+  "footer": {
+    "description": "DokterKlik is proud to be a trusted healthcare platform that connects patients with quality doctors across Indonesia. With innovative online consultation services and an integrated network of doctors, we ensure easy access to healthcare even in remote locations, making us the preferred choice for your healthcare needs anywhere.",
+    "company_title": "COMPANY",
+    "home": "Home",
+    "about": "About us",
+    "contact": "Contact us",
+    "doctors": "All Doctors",
+    "contact_title": "GET IN TOUCH",
+    "copyright": "Copyright © 2025 DokterKlik - All Right Reserved."
+  }
+}

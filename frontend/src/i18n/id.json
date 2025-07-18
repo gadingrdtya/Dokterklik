@@ -1,0 +1,161 @@
+{
+  "login": {
+    "create_account": "Buat Akun",
+    "login": "Masuk",
+    "please": "Silakan",
+    "signup_action": "daftar untuk memesan janji temu",
+    "login_action": "masuk untuk memesan janji temu",
+    "full_name": "Nama Lengkap",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "already_have_account": "Sudah punya akun?",
+    "login_here": "Masuk di sini",
+    "new_account": "Belum punya akun?",
+    "click_here": "Klik di sini"
+  },
+  "navbar": {
+    "home": "BERANDA",
+    "doctors": "SEMUA DOKTER",
+    "about": "TENTANG",
+    "contact": "KONTAK",
+    "my_profile": "Profil Saya",
+    "my_appointments": "Janji Saya",
+    "logout": "Keluar",
+    "create_account": "Buat Akun"
+  },
+  "header": {
+    "title1": "Pesan Janji Temu",
+    "title2": "Dengan Dokter Terpercaya",
+    "subtitle": "Telusuri daftar lengkap dokter terpercaya kami dan jadwalkan janji temu Anda dengan mudah tanpa ribet.",
+    "button": "Pesan Sekarang"
+  },
+  "banner": {
+    "title1": "Pesan Janji Temu",
+    "title2": "Dengan Dokter Terpercaya",
+    "button": "Buat Akun"
+  },
+  "speciality": {
+    "title": "Cari Berdasarkan Spesialisasi",
+    "subtitle": "Telusuri daftar lengkap dokter terpercaya kami dan jadwalkan janji temu Anda dengan mudah.",
+    "list": {
+      "General physician": "Dokter umum",
+      "Gynecologist": "Dokter Kandungan",
+      "Dermatologist": "Dokter Kulit",
+      "Pediatricians": "Dokter Anak",
+      "Neurologist": "Dokter Saraf",
+      "Gastroenterologist": "Dokter Penyakit Dalam"
+    }
+  },
+  "topDoctors": {
+    "title": "Dokter Teratas yang Bisa Dipesan",
+    "subtitle": "Telusuri daftar lengkap dokter terpercaya kami.",
+    "available": "Tersedia",
+    "unavailable": "Tidak Tersedia",
+    "more": "Lihat Semua"
+  },
+  "doctors": {
+    "browseText": "Telusuri dokter berdasarkan spesialisasi.",
+    "filterButton": "Filter",
+    "available": "Tersedia",
+    "unavailable": "Tidak Tersedia",
+    "specialities": {
+      "General physician": "Dokter Umum",
+      "Gynecologist": "Dokter Kandungan",
+      "Dermatologist": "Dokter Kulit",
+      "Pediatricians": "Dokter Anak",
+      "Neurologist": "Dokter Saraf",
+      "Gastroenterologist": "Dokter Penyakit Dalam"
+    }
+  },
+  "appointment": {
+    "about": "Tentang",
+    "fee": "Biaya Konsultasi",
+    "booking_slots": "Jadwal Booking",
+    "book_now": "Pesan Sekarang",
+    "login_required": "Silakan login untuk memesan janji temu",
+    "userdata_missing": "Data pengguna tidak ditemukan. Silakan login ulang."
+  },
+  "days": {
+    "sun": "Minggu",
+    "mon": "Senin",
+    "tue": "Selasa",
+    "wed": "Rabu",
+    "thu": "Kamis",
+    "fri": "Jumat",
+    "sat": "Sabtu"
+  },
+  "about": {
+    "title": "TENTANG",
+    "us": "KAMI",
+    "description1": "Selamat datang di DokterKlik, mitra tepercaya Anda dalam mengelola kebutuhan kesehatan Anda dengan mudah dan efisien. Di DokterKlik, kami memahami tantangan yang dihadapi individu dalam hal menjadwalkan janji temu dengan dokter dan melakukan konsultasi medis daring melalui obrolan.",
+    "description2": "DokterKlik berkomitmen untuk menyediakan teknologi kesehatan terbaik. Kami terus berupaya meningkatkan platform kami, mengintegrasikan kemajuan terbaru untuk meningkatkan pengalaman pengguna dan memberikan layanan terbaik. Baik Anda memesan janji temu pertama atau melakukan konsultasi medis online melalui chat, DokterKlik siap membantu Anda di setiap langkah.",
+    "vision_title": "Visi Kami",
+    "vision_text": "Visi kami di DokterKlik adalah menciptakan pengalaman layanan kesehatan yang lancar bagi setiap pengguna. Kami bertujuan untuk menjembatani kesenjangan antara pasien dan penyedia layanan kesehatan, sehingga Anda dapat mengakses perawatan yang Anda butuhkan, kapan pun Anda membutuhkannya.",
+    "why": "MENGAPA",
+    "choose_us": "MEMILIH KAMI",
+    "efficiency_title": "EFISIENSI:",
+    "efficiency_text": "Penjadwalan janji temu yang efisien sesuai gaya hidup sibuk Anda.",
+    "convenience_title": "KENYAMANAN:",
+    "convenience_text": "Akses ke jaringan profesional kesehatan terpercaya di daerah Anda.",
+    "personalization_title": "PERSONALISASI:",
+    "personalization_text": "Rekomendasi dan pengingat yang dipersonalisasi untuk membantu Anda tetap sehat."
+  },
+  "contact": {
+    "title": "HUBUNGI",
+    "us": "KAMI",
+    "office_title": "KANTOR KAMI",
+    "office_address1": "Jalan Sudirman No. 123",
+    "office_address2": "Jakarta Pusat, Indonesia",
+    "contact_info1": "Tel: (021) 9080-7050",
+    "contact_info2": "Email: dokterklik@gmail.com",
+    "careers_title": "Karier di DOKTERKLIK",
+    "careers_text": "Pelajari lebih lanjut tentang tim dan lowongan kami.",
+    "explore_jobs": "Lihat Lowongan"
+  },
+  "relatedDoctors": {
+    "title": "Dokter Terkait",
+    "subtitle": "Telusuri daftar lengkap dokter terpercaya kami.",
+    "available": "Tersedia",
+    "unavailable": "Tidak Tersedia",
+    "more": "Lihat Semua"
+  },
+  "profile": {
+    "contact_info": "INFORMASI KONTAK",
+    "basic_info": "INFORMASI DASAR",
+    "email": "Email",
+    "phone": "Telepon",
+    "address": "Alamat",
+    "gender": "Jenis Kelamin",
+    "dob": "Tanggal Lahir",
+    "male": "Laki-laki",
+    "female": "Perempuan",
+    "save": "Simpan informasi",
+    "edit": "Ubah"
+  },
+  "myappointments": {
+    "title": "Janji Temu Saya",
+    "empty": "Tidak ada janji temu.",
+    "online_consult": "Konsultasi Online",
+    "pay_online": "Bayar Online",
+    "cancel": "Batalkan janji temu",
+    "cancelled": "Janji temu dibatalkan",
+    "completed": "Selesai",
+    "prescription": "Resep",
+    "paid": "Sudah Dibayar",
+    "datetime": "Tanggal & Waktu",
+    "address": "Alamat:"
+  },
+  "common": {
+    "close": "Tutup"
+  },
+  "footer": {
+    "description": "DokterKlik bangga menjadi platform kesehatan terpercaya yang menghubungkan pasien dengan dokter berkualitas di seluruh Indonesia. Dengan layanan konsultasi online yang inovatif dan jaringan dokter terintegrasi, kami memastikan akses kesehatan mudah bahkan di daerah terpencil, menjadikan kami pilihan utama untuk kebutuhan kesehatan Anda di mana saja.",
+    "company_title": "PERUSAHAAN",
+    "home": "Beranda",
+    "about": "Tentang Kami",
+    "contact": "Hubungi Kami",
+    "doctors": "Semua Dokter",
+    "contact_title": "HUBUNGI KAMI",
+    "copyright": "Hak Cipta © 2025 DokterKlik - Semua Hak Dilindungi."
+  }
+}

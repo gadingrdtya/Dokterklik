@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import ChatModal from '../components/ChatModal'
 import PrescriptionCard from '../components/PrescriptionCard'
 import { ChatContext } from '../context/ChatContext'
+import { useTranslation } from 'react-i18next'
 
 const MyAppointments = () => {
   const { backendUrl, token, getDoctorsData } = useContext(AppContext)
@@ -16,11 +17,17 @@ const MyAppointments = () => {
   const [showModal, setShowModal] = useState(false)
 
   const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const { t, i18n } = useTranslation()
 
   // Format tanggal slot
   const slotDateFormat = (slotDate) => {
     const dateArray = slotDate.split('_')
-    return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`
+    const date = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`)
+    return date.toLocaleDateString(i18n.language, {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
   }
 
   // Ambil daftar janji temu pengguna
@@ -161,10 +168,10 @@ const MyAppointments = () => {
 
   return (
     <div>
-      <p className="pb-3 mt-12 font-medium text-zinc-700 border-b">My appointments</p>
+      <p className="pb-3 mt-12 font-medium text-zinc-700 border-b">{t('myappointments.title')}</p>
       <div>
         {appointments.length === 0 ? (
-          <p>No appointments found.</p>
+          <p>{t('myappointments.empty')}</p>
         ) : (
           appointments.map((item, index) => (
             <div className="grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b" key={index}>
@@ -173,40 +180,40 @@ const MyAppointments = () => {
               </div>
               <div className="flex-1 text-sm text-zinc-600">
                 <p className="text-neutral-800 font-semibold">{item.docData.name}</p>
-                <p>{item.docData.speciality}</p>
-                <p className="text-zinc-700 font-medium mt-1">Address:</p>
+                <p>{t(`speciality.list.${item.docData.speciality}`, { defaultValue: item.docData.speciality })}</p>
+                <p className="text-zinc-700 font-medium mt-1">{t('myappointments.address')}</p>
                 <p className="text-xs">{item.docData.address.line1}</p>
                 <p className="text-xs">{item.docData.address.line2}</p>
                 <p className="text-sm mt-1">
-                  <span className="text-sm text-neutral-700 font-medium">Date & Time:</span>
+                  <span className="text-sm text-neutral-700 font-medium">{t('myappointments.datetime')}:</span>
                   {slotDateFormat(item.slotDate)} | {item.slotTime}
                 </p>
               </div>
               <div></div>
               <div className="flex flex-col gap-2 justify-end">
-                <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Konsultasi Online</button>
+                <button onClick={() => openChatModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>{t('myappointments.online_consult')}</button>
 
                 {!item.cancelled && !item.payment && !item.isCompleted && (
-                  <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Pay Online</button>
+                  <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>{t('myappointments.pay_online')}</button>
                 )}
 
                 {item.isCompleted && item.prescription && (
-                  <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>Resep</button>
+                  <button onClick={() => openPrescriptionModal(item)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-[#00B8BA] hover:text-white transition-all duration-300'>{t('myappointments.prescription')}</button>
                 )}
 
                 {item.payment && !item.isCompleted && (
-                  <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border bg-indigo-50 rounded cursor-not-allowed' disabled>Paid</button>
+                  <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border bg-indigo-50 rounded cursor-not-allowed' disabled>{t('myappointments.paid')}</button>
                 )}
 
                 {!item.cancelled && !item.payment && !item.isCompleted && (
-                  <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel appointment</button>
+                  <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>{t('myappointments.cancel')}</button>
                 )}
 
                 {item.cancelled && !item.isCompleted && (
-                  <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment cancelled</button>
+                  <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>{t('myappointments.cancelled')}</button>
                 )}
 
-                {item.isCompleted && <button className='sm:min-w-48 py-2 border border-green-500 rounded text-green-500'>Completed</button>}
+                {item.isCompleted && <button className='sm:min-w-48 py-2 border border-green-500 rounded text-green-500'>{t('myappointments.completed')}</button>}
               </div>
             </div>
           ))
@@ -226,7 +233,7 @@ const MyAppointments = () => {
               isDoctor={false}
               orderDetails={orderDetails}
             />
-            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">Tutup</button>
+            <button onClick={() => setShowModal(false)} className="mt-4 bg-[#00B8BA] text-white px-4 py-2 rounded w-full">{t('common.close')}</button>
           </div>
         </div>
       )}

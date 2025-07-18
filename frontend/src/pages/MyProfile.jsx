@@ -3,9 +3,11 @@ import { AppContext } from '../context/AppContext'
 import {assets} from '../assets/assets'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const MyProfile = () => {
 
+  const { t } = useTranslation()
   const {userData,setUserData,token,backendUrl,loadUserProfileData} = useContext(AppContext)
 
   const [isEdit,setIsEdit] = useState(true)
@@ -63,17 +65,17 @@ const MyProfile = () => {
       }
       <hr className='bg-zinc-400 h-[1px] border-none mb-2' />
       <div>
-        <p className='text-neutral-500 underline mt-3'>CONTACT INFORMATION</p>
+        <p className='text-neutral-500 underline mt-3'>{t('profile.contact_info')}</p>
         <div className='grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700'>
-          <p className='font-medium'>Email id:</p>
+          <p className='font-medium'>{t('profile.email')}:</p>
           <p className='text-[#00B8BA]'>{userData.email}</p>
-          <p className='font-medium'>Phone:</p>
+          <p className='font-medium'>{t('profile.phone')}:</p>
           {
             isEdit 
             ? <input className='bg-gray-100 max-w-52' type="text" value={userData.phone} onChange={e => setUserData(prev => ({...prev,phone:e.target.value}))}/>
             : <p className='text-[#00B8BA]'>{userData.phone}</p>
           }
-          <p className='font-medium'>Address:</p>
+          <p className='font-medium'>{t('profile.address')}:</p>
           {
             isEdit
             ? <p>
@@ -90,18 +92,18 @@ const MyProfile = () => {
         </div>
       </div>
       <div>
-        <p className='text-neutral-500 underline mt-3'>BASIC INFORMATION</p>
+        <p className='text-neutral-500 underline mt-3'>{t('profile.basic_info')}</p>
         <div className='grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700'>
-          <p className='font-medium'>Gender:</p>
+          <p className='font-medium'>{t('profile.gender')}:</p>
           {
             isEdit 
             ? <select className='max-w-20 bg-gray-100' onChange={(e) => setUserData(prev => ({...prev,gender:e.target.value}))} value={userData.gender}>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="Male ">{t('profile.male')}</option>
+              <option value="Female">{t('profile.female')}</option>
             </select>
-            : <p className='text-gray-400'>{userData.gender}</p>
+            : <p className='text-gray-400'>{t(`profile.${userData.gender.toLowerCase()}`)}</p>
           }
-          <p className='font-medium'>Birthday:</p>
+          <p className='font-medium'>{t('profile.dob')}:</p>
           {
             isEdit 
             ? <input className='max-w-28 bg-gray-100' type="date" onChange={(e) => setUserData(prev => ({...prev,dob:e.target.value}))} value={userData.dob}/>
@@ -112,8 +114,8 @@ const MyProfile = () => {
       <div className='mt-10'>
         {
           isEdit
-          ? <button className='border border-[#00B8BA] px-8 py-2 rounded-full hover:bg-[#00B8BA] hover:text-white transition-all' onClick={updateUserProfileData}>Save information</button>
-          : <button className='border border-[#00B8BA] px-8 py-2 rounded-full hover:bg-[#00B8BA] hover:text-white transition-all' onClick={() =>setIsEdit(true)}>Edit</button>
+          ? <button className='border border-[#00B8BA] px-8 py-2 rounded-full hover:bg-[#00B8BA] hover:text-white transition-all' onClick={updateUserProfileData}>{t('profile.save')}</button>
+          : <button className='border border-[#00B8BA] px-8 py-2 rounded-full hover:bg-[#00B8BA] hover:text-white transition-all' onClick={() =>setIsEdit(true)}>{t('profile.edit')}</button>
         }
       </div>
     </div>
