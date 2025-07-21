@@ -3,11 +3,14 @@ import { DoctorContext } from '../../context/DoctorContext'
 import { AppContext } from '../../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const DoctorProfile = () => {
 
   const {dToken, profileData, setProfileData, getProfileData, backendUrl} = useContext(DoctorContext)
   const {currency} = useContext(AppContext)
+  const { i18n } = useTranslation()
+  const lang = i18n.language || 'id'
 
   const [isEdit, setIsEdit] = useState(false)
 
@@ -50,14 +53,14 @@ const DoctorProfile = () => {
           {/* ----- Doc Info : name, degree, experience ----- */}
           <p className='flex items-center gap-2 text-3xl font-medium text-gray-700'>{profileData.name}</p>
           <div className='flex items-center gap-2 mt-1 text-gray-600'>
-            <p>{profileData.degree} - {profileData.speciality}</p>
-            <button className='py-0.5 px-2 border text-xs rounded-full'>{profileData.experience}</button>
+            <p>{profileData.degree?.[lang]} - {profileData.speciality?.[lang]}</p>
+            <button className='py-0.5 px-2 border text-xs rounded-full'>{profileData.experience?.[lang]}</button>
           </div>
           {/* ----- Doc About ----- */}
           <div>
             <p className='flex items-center gap-1 text-sm font-medium text-neutral-800 mt-3'>About:</p>
             <p className='text-sm text-gray-600 max-w-[700px] mt-1'>
-              {profileData.about}
+              {profileData.about?.[lang]}
             </p>
           </div>
           <p className='text-gray-600 font-medium mt-4'>
