@@ -7,7 +7,7 @@ const createPrescription = async (req, res) => {
         const docId = req.user.docId;
 
         const appointment = await appointmentModel.findById(appointmentId);
-        if (!appointment || appointment.docId !== docId) {
+        if (!appointment || appointment.docId.toString() !== docId.toString()) {
             return res.json({ success: false, message: "Unauthorized or Appointment not found" });
         }
 
