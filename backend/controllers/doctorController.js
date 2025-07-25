@@ -78,7 +78,7 @@ const appointmentComplete = async (req, res) => {
         const docId = req.user.docId;
         const appointmentData = await appointmentModel.findById(appointmentId);
 
-        if (!appointmentData || appointmentData.docId !== docId) {
+        if (!appointmentData || appointmentData.docId.toString() !== docId) {
             return res.json({ success: false, message: "Unauthorized or Appointment not found" });
         }
 
