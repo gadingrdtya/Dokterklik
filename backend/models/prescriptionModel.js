@@ -6,6 +6,7 @@ const prescriptionSchema = new mongoose.Schema({
     userId: { type: String, required: true },
     medicines: [{ name: String, dosage: String, instructions: String, }],
     notes: { type: String },
+    price: { type: Number },
     createdAt: { type: Date, default: Date.now }
 })
 
