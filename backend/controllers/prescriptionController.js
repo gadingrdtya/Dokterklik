@@ -31,12 +31,15 @@ const createPrescription = async (req, res) => {
             return res.json({ success: false, message: "Each medicine must have a valid name, dosage, and instructions." });
         }
 
+        const price = validMedicines.length * 10000
+
         const prescription = await prescriptionModel.create({
             appointmentId,
             docId,
             userId,
             medicines: validMedicines, // Simpan hanya obat yang valid
-            notes
+            notes,
+            price
         });
 
         await appointmentModel.findByIdAndUpdate(appointmentId, { prescription: prescription._id });
