@@ -227,7 +227,7 @@ const paymentMidtrans = async (req, res) => {
 
         const doctorFee = Number(appointment.docId.fees) || 50000;
         const consultationFee = 30000;
-        const prescriptionFee = appointment.prescription && appointment.prescription.medicines && appointment.prescription.medicines.length > 0 ? appointment.prescription.medicines.length * 10000 : 0;
+        const prescriptionFee = appointment.prescription?.price || 0;
         const calculatedTotal = total || (doctorFee + consultationFee + prescriptionFee)
 
         await appointmentModel.findByIdAndUpdate(appointmentId, { amount: calculatedTotal })
@@ -319,12 +319,12 @@ const getAppointmentStatus = async (req, res) => {
 const calculatePaymentDetails = async (req, res) => {
     try {
         const { appointmentId } = req.params;
-        const appointment = await appointmentModel.findById(appointmentId).populate('docId', 'fees').populate('prescription');
+        const appointment = await appointmentModel.findById(appointmentId).populate('docId').populate('prescription');
         if (!appointment) return res.json({ success: false, message: 'Appointment not found' });
 
         const doctorFee = Number(appointment.docId.fees) || 50000;
         const consultationFee = 30000
-        const prescriptionFee = appointment.prescription && appointment.prescription.medicines && appointment.prescription.medicines.length > 0 ? appointment.prescription.medicines.length * 10000 : 0
+        const prescriptionFee = appointment.prescription?.price || 0
         const total = doctorFee + consultationFee + prescriptionFee;
 
         res.json({ success: true, details: { doctorFee, consultationFee, prescriptionFee, total } });
