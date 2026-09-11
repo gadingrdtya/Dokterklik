@@ -324,7 +324,7 @@ const calculatePaymentDetails = async (req, res) => {
 
         const doctorFee = Number(appointment.docId.fees) || 50000;
         const consultationFee = 30000
-        const prescriptionFee = appointment.prescription?.price || 0
+        const prescriptionFee = appointment.prescription?.price || 0;
         const total = doctorFee + consultationFee + prescriptionFee;
 
         res.json({ success: true, details: { doctorFee, consultationFee, prescriptionFee, total } });

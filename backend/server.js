@@ -16,8 +16,8 @@ import chatModel from './models/chatModel.js'
 // app config
 const app = express()
 const port = process.env.PORT || 4000
-connectDB()
-connectCloudinary()
+await connectDB()
+await connectCloudinary()
 
 // socket.io
 const server = http.createServer(app)
